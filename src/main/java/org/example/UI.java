@@ -1,7 +1,24 @@
 package org.example;
 
 import chess.ChessPiece;
+import chess.ChessPosition;
+
+import java.util.InputMismatchException;
+import java.util.Scanner;
+
 public class UI {
+
+    public static ChessPosition readChessPosition(Scanner sc) {
+        try {
+            String s = sc.nextLine();
+            char column = s.charAt(0);
+            int row = Integer.parseInt(s.substring(1));
+            return new ChessPosition(column, row);
+        }
+        catch (RuntimeException error) {
+            throw new InputMismatchException("Error reading user input");
+        }
+    }
 
     public static void printBoard(ChessPiece[][] pieces) {
         for (int i=0; i < pieces.length; i++) {
